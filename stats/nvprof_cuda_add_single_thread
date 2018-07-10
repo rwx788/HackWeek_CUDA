@@ -1,1 +1,23 @@
-Max error: 0
+==1865== NVPROF is profiling process 1865, command: bin/add_single_thread
+==1865== Profiling application: bin/add_single_thread
+==1865== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  12.8883s         1  12.8883s  12.8883s  12.8883s  add(int, float*, float*)
+      API calls:   98.74%  12.8884s         1  12.8884s  12.8884s  12.8884s  cudaDeviceSynchronize
+                    0.93%  121.87ms         2  60.935ms  12.279ms  109.59ms  cudaMallocManaged
+                    0.23%  30.001ms         1  30.001ms  30.001ms  30.001ms  cudaLaunch
+                    0.09%  12.098ms         2  6.0489ms  5.0380ms  7.0598ms  cudaFree
+                    0.00%  189.77us        94  2.0180us     536ns  62.515us  cuDeviceGetAttribute
+                    0.00%  68.145us         1  68.145us  68.145us  68.145us  cuDeviceTotalMem
+                    0.00%  23.455us         1  23.455us  23.455us  23.455us  cuDeviceGetName
+                    0.00%  11.762us         3  3.9200us     580ns  9.5230us  cudaSetupArgument
+                    0.00%  6.8110us         1  6.8110us  6.8110us  6.8110us  cudaConfigureCall
+                    0.00%  3.4610us         3  1.1530us     532ns  1.8730us  cuDeviceGetCount
+                    0.00%  1.7210us         2     860ns     632ns  1.0890us  cuDeviceGet
+
+==1865== Unified Memory profiling result:
+Device "GRID K520 (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     130  1.9692MB  512.00KB  2.0000MB  256.0000MB  29.08387ms  Host To Device
+    2328  168.91KB  4.0000KB  0.9961MB  384.0000MB  45.64851ms  Device To Host
+Total CPU Page faults: 1164
