@@ -1,0 +1,12 @@
+
+Device: GRID K520
+Transfer size (MB): 128
+
+Pageable transfers
+  Host to Device bandwidth (GB/s): 2.643467
+  Device to Host bandwidth (GB/s): 2.825625
+
+Pinned transfers
+  Host to Device bandwidth (GB/s): 9.534676
+  Device to Host bandwidth (GB/s): 8.913090
+n
