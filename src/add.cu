@@ -27,9 +27,12 @@ int main(void) {
   // Allocate Unified Memory – accessible from CPU or GPU
   cudaMallocManaged(&x, N * sizeof(float));
   cudaMallocManaged(&y, N * sizeof(float));
-
+  // Get device id
+  int device = -1;
+  cudaGetDevice(&device);
+  // Get number of Streaming Multiprocessors
   int numSMs;
-  cudaDeviceGetAttribute(&numSMs, cudaDevAttrMultiProcessorCount, 0);
+  cudaDeviceGetAttribute(&numSMs, cudaDevAttrMultiProcessorCount, device);
   // initialize x and y arrays on the GPU
   init<<<32 * numSMs, 256>>>(N, x, y);
 
