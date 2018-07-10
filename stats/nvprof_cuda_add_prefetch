@@ -1,0 +1,26 @@
+==2226== NVPROF is profiling process 2226, command: bin/add_prefetch
+==2226== Profiling application: bin/add_prefetch
+==2226== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  3.7640ms         1  3.7640ms  3.7640ms  3.7640ms  add(int, float*, float*)
+      API calls:   72.39%  119.96ms         2  59.978ms  12.275ms  107.68ms  cudaMallocManaged
+                   17.84%  29.556ms         1  29.556ms  29.556ms  29.556ms  cudaLaunch
+                    7.29%  12.081ms         2  6.0406ms  5.0292ms  7.0520ms  cudaFree
+                    2.28%  3.7726ms         1  3.7726ms  3.7726ms  3.7726ms  cudaDeviceSynchronize
+                    0.12%  193.73us        94  2.0600us     586ns  62.277us  cuDeviceGetAttribute
+                    0.04%  67.989us         1  67.989us  67.989us  67.989us  cuDeviceTotalMem
+                    0.01%  23.768us         1  23.768us  23.768us  23.768us  cuDeviceGetName
+                    0.01%  17.639us         2  8.8190us  1.5830us  16.056us  cudaMemPrefetchAsync
+                    0.01%  13.771us         3  4.5900us     635ns  11.435us  cudaSetupArgument
+                    0.01%  9.9110us         1  9.9110us  9.9110us  9.9110us  cudaGetDevice
+                    0.00%  3.6070us         1  3.6070us  3.6070us  3.6070us  cudaConfigureCall
+                    0.00%  3.3650us         3  1.1210us     598ns  1.7400us  cuDeviceGetCount
+                    0.00%  2.6950us         1  2.6950us  2.6950us  2.6950us  cudaDeviceGetAttribute
+                    0.00%  2.2040us         2  1.1020us     757ns  1.4470us  cuDeviceGet
+
+==2226== Unified Memory profiling result:
+Device "GRID K520 (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     130  1.9692MB  512.00KB  2.0000MB  256.0000MB  28.64506ms  Host To Device
+    2328  168.91KB  4.0000KB  0.9961MB  384.0000MB  44.26138ms  Device To Host
+Total CPU Page faults: 1164
