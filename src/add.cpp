@@ -1,10 +1,8 @@
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
-#include "cuda_runtime.h"
 
 // function to add the elements of two arrays
-__global__
 void add(int n, float *x, float *y)
 {
   for (int i = 0; i < n; i++)
@@ -13,7 +11,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-  int N = 1<<20; // 1M elements
+  int N = 1<<25; // 1M elements
 
   float *x = new float[N];
   float *y = new float[N];
@@ -25,7 +23,9 @@ int main(void)
   }
 
   // Run kernel on 1M elements on the CPU
-  add(N, x, y);
+  int blockSize = 256;
+  int numBlocks = (N + blockSize - 1) / blockSize;
+  add<<<numBlocks, blockSize>>>(N, x, y);
 
   // Check for errors (all values should be 3.0f)
   float maxError = 0.0f;
