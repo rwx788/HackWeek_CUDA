@@ -29,8 +29,9 @@ int main(int argc, char **argv) {
 
 	for (int i=1; i<=4; ++i) {
 		string fileId = std::to_string(i);
-		const string inputFile = argc >= 2 ? argv[1] : "../data/opensuse"+fileId+".jpg";
-		const string outputFile = argc >= 3 ? argv[2] : "../data/opensuse"+fileId+"_sketching.jpg";
+		const string inputFile = argc >= 2 ? argv[1] : "data/opensuse"+fileId+".jpg";
+		const string outputFile = argc >= 3 ? argv[2] :
+            "data/opensuse"+fileId+"_sketching_color.jpg";
 		processImage(inputFile, outputFile);
 	}
 
@@ -143,6 +144,10 @@ void processImage(const cv::cuda::GpuMat& inputImage, cv::cuda::GpuMat& outputIm
 
 		// invert the gradient image
 		cv::cuda::subtract(cv::Scalar::all(255), outputImage, outputImage);
+        // Convert back to 3 channels for blending
+		cv::cuda::cvtColor(outputImage, outputImage, COLOR_GRAY2BGR);
+
+        cv::cuda:: addWeighted(inputImage , 0.3, outputImage, 0.7, 0.1, outputImage);
 
 	} else if (inputImage.channels() == 1) { // grayscale image
 		computeGradients(inputImage, outputImage);
@@ -183,6 +188,7 @@ void processImage(std::string inputFile, std::string outputFile) {
 	GpuTimer timer;
 	timer.Start();
 	processImage(gpuInputImage, gpuOutputImage);
+
 	timer.Stop();
 
 	printf("Method processImage() ran in: %f msecs, image size: %ux%u, msecs/pixel: %f .\n",
@@ -190,8 +196,7 @@ void processImage(std::string inputFile, std::string outputFile) {
 
 	// copy the result gradient from GPU to CPU and release GPU memory
 	gpuOutputImage.download(outputImage);
-
-	gpuInputImage.release();
+  	gpuInputImage.release();
 	gpuOutputImage.release();
 
 	// Display the output image
