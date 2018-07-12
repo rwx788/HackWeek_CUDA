@@ -1,5 +1,5 @@
 CXX		     := nvcc
-CXX_FLAGS    := -std=c++11 -O3
+CXX_FLAGS    := -std=c++11
 
 BIN		     := bin
 SRC		     := src
@@ -8,7 +8,7 @@ INC_PARAMS   := $(addprefix -I,$(INC))
 OPEN_CV_LIBS := opencv_core opencv_imgproc opencv_highgui opencv_cudafilters \
                opencv_cudaarithm opencv_gpu opencv_cudaimgproc opencv_videoio \
 			   opencv_imgcodecs
-LIB		     := lib
+LIB		     := /usr/local/lib
 
 LIBRARIES	 := $(addprefix -l,$(OPEN_CV_LIBS))
 EXECUTABLE	 := binary
