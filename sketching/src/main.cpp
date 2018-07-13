@@ -16,7 +16,7 @@ using namespace cv;
 
 int main(int argc, char **argv) {
 
-	for (int i=1; i<=5; ++i) {
+	for (int i=1; i<=6; ++i) {
 		string fileId = std::to_string(i);
 		const string inputFile = argc >= 2 ? argv[1] : "data/opensuse"+fileId+".jpg";
 		const string outputFile = argc >= 3 ? argv[2] : "data/opensuse"+fileId+"_sketching_color_cpu.jpg";
@@ -108,7 +108,7 @@ void processImage(const cv::Mat& inputImage, cv::Mat& outputImage)
  * The output image is saved as grayscale.
  */
 void processImage(std::string inputFile, std::string outputFile) {
-	printf("GPU::Processing image: %s ...\n", inputFile.c_str());
+	printf("CPU::Processing image: %s ...\n", inputFile.c_str());
 
 	// Read the file
 	Mat inputImage = cv::imread(inputFile, CV_LOAD_IMAGE_UNCHANGED);
